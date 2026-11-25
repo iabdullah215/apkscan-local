@@ -15,7 +15,7 @@ This repository is the evidence for the entry: fine-tuning details, the before/a
 | Hardware for training and every number | Apple M4 (4P+6E cores), 16 GB unified memory, macOS 27.2.1 |
 | Team | MNM (solo): [iabdullah215](https://github.com/iabdullah215) |
 | Fine-tuned model (GGUF + LoRA adapter) | Hugging Face: [hwatsauce/apkscan-local](https://huggingface.co/hwatsauce/apkscan-local) |
-| Demo video | YouTube: (link pending) |
+| Demo video | YouTube: [https://youtu.be/BUchPPf7S3A](https://youtu.be/BUchPPf7S3A) |
 
 ## The result in one picture
 
@@ -89,7 +89,7 @@ Not included on purpose: model weights and the video (hosted on Hugging Face and
 
 ## The demo video
 
-YouTube: (link pending). It is a screen recording of [demo/video_demo.sh](demo/video_demo.sh), run fully on the M4 laptop. The script narrates each step on screen in yellow `[STEP N]` lines:
+[Watch on YouTube](https://youtu.be/BUchPPf7S3A). It is a screen recording of [demo/video_demo.sh](demo/video_demo.sh), run fully on the M4 laptop. The script narrates each step on screen in yellow `[STEP N]` lines:
 
 1. Hardware (Apple M4, 16 GB) and a network check.
 2. The test app (OVAA, held out from training) and the two model files, both Q8_0 and the same size.
