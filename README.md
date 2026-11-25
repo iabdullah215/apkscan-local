@@ -14,7 +14,7 @@ This repository is the evidence for the entry: fine-tuning details, the before/a
 | Runtime | llama.cpp b10210 (`llama-server`, Metal), bound to 127.0.0.1, no network calls |
 | Hardware for training and every number | Apple M4 (4P+6E cores), 16 GB unified memory, macOS 27.2.1 |
 | Team | MNM (solo): [iabdullah215](https://github.com/iabdullah215) |
-| Fine-tuned model (GGUF + LoRA adapter) | Hugging Face: (link pending) |
+| Fine-tuned model (GGUF + LoRA adapter) | Hugging Face: [hwatsauce/apkscan-local](https://huggingface.co/hwatsauce/apkscan-local) |
 | Demo video | YouTube: (link pending) |
 
 ## The result in one picture
@@ -30,9 +30,9 @@ On two held-out apps (OVAA and InsecureBankv2, 36 hand-labelled vulnerabilities)
 
 | File | What it is | Size | Where |
 |---|---|---:|---|
-| `tuned-verifier-v1-Q8_0.gguf` | fine-tuned verifier, 8-bit, used in the video and the CLI default | 1.6 GB | Hugging Face |
-| `tuned-verifier-v1-Q4_K_M.gguf` | same model, 4-bit, same accuracy | 1.0 GB | Hugging Face |
-| `adapters.safetensors` + `adapter_config.json` | the LoRA adapter itself (MLX format) | 42 MB | Hugging Face |
+| `tuned-verifier-v1-Q8_0.gguf` | fine-tuned verifier, 8-bit, used in the video and the CLI default | 1.6 GB | [Hugging Face](https://huggingface.co/hwatsauce/apkscan-local/blob/main/tuned-verifier-v1-Q8_0.gguf) |
+| `tuned-verifier-v1-Q4_K_M.gguf` | same model, 4-bit, same accuracy | 1.0 GB | [Hugging Face](https://huggingface.co/hwatsauce/apkscan-local/blob/main/tuned-verifier-v1-Q4_K_M.gguf) |
+| `adapters.safetensors` + `adapter_config.json` | the LoRA adapter itself (MLX format) | 42 MB | [Hugging Face](https://huggingface.co/hwatsauce/apkscan-local/tree/main/lora-adapter) |
 | `base-Q8_0.gguf` | untuned Qwen2.5-Coder-1.5B-Instruct, the "before" in the video | 1.6 GB | convert from [Qwen/Qwen2.5-Coder-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct) |
 
 SHA-256 checksums of these files and of the demo video are in [SHA256SUMS.txt](SHA256SUMS.txt), so the uploaded copies can be checked against the files used for every number here.
@@ -232,7 +232,7 @@ The split is by app, never by snippet, and a unit test checks that no test-app t
 
 ## How to verify
 
-**Check the downloaded model files.** Download the GGUF files and the adapter from Hugging Face and compare their SHA-256 with [SHA256SUMS.txt](SHA256SUMS.txt):
+**Check the downloaded model files.** Download the GGUF files and the adapter from [Hugging Face](https://huggingface.co/hwatsauce/apkscan-local) and compare their SHA-256 with [SHA256SUMS.txt](SHA256SUMS.txt):
 ```bash
 shasum -a 256 tuned-verifier-v1-Q8_0.gguf tuned-verifier-v1-Q4_K_M.gguf adapters.safetensors
 ```
