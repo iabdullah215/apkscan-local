@@ -1,0 +1,133 @@
+{
+  "name": "verifier-base-Q8_0-shortprompt",
+  "split": "test",
+  "pipeline": "verifier",
+  "gguf": "models/gguf/base-Q8_0.gguf",
+  "prompt_style": "short",
+  "true_bias": 0.0,
+  "candidates": 129,
+  "gold_findings": 36,
+  "candidate_recall_ceiling": 1.0,
+  "verdict": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 42,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tn": 67,
+    "accuracy": 0.615
+  },
+  "json_valid_strict": 0.0,
+  "json_parsed": 1.0,
+  "overall": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 36,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "macro_f1": 0.0
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 10,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "insecure_webview": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "hardcoded_secret": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "weak_crypto": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "insecure_network": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "insecure_storage": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "provider_sqli": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "intent_redirection": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 7,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "per_app": {
+    "insecurebankv2": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 19,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "macro_f1": 0.0
+    },
+    "ovaa": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 17,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "macro_f1": 0.0
+    }
+  },
+  "outcome_counts": {
+    "tp": 0,
+    "fp": 0,
+    "dup": 0,
+    "ignored": 0
+  },
+  "wall_s": 76.2,
+  "perf": {
+    "prompt_tok_per_s": 1290.2,
+    "gen_tok_per_s": 60.0,
+    "avg_s_per_candidate": 0.58,
+    "scan_s_per_app": 37.3,
+    "peak_rss_mb": 3365,
+    "gguf_mb": 1647
+  }
+}

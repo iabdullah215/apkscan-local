@@ -1,0 +1,36 @@
+# Ground truth for OVAA in SOURCE form (test_src split): same app as labels/ovaa.yaml, read from
+# GitHub source at commit e5d5a8ba (app/src/main), all 21 files read. Same findings and ignore
+# regions as the jadx test set, at source line numbers. Used to compare source vs decompiled input.
+app: ovaa-src
+split: test_src
+findings:
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [21, 26], severity: medium, evidence: 'LoginActivity exported="true" with no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [33, 38], severity: medium, evidence: 'MainActivity exported="true" with no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [45, 49], severity: high, evidence: 'InsecureLoggerService exported="true" with no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [50, 50], severity: high, evidence: 'TheftOverwriteProvider exported="true" with no permission'}
+  - {file: oversecured/ovaa/activities/LoginActivity.java, vuln_class: intent_redirection, line_range: [77, 80], severity: high, evidence: 'startActivity(getParcelableExtra(getIntent(), "redirect_intent"))'}
+  - {file: oversecured/ovaa/activities/DeeplinkActivity.java, vuln_class: intent_redirection, line_range: [35, 39], severity: high, evidence: 'loginUtils.setLoginUrl(uri.getQueryParameter("url")) from a browsable deep link'}
+  - {file: oversecured/ovaa/activities/DeeplinkActivity.java, vuln_class: intent_redirection, line_range: [61, 65], alt_ranges: [[41, 45]], severity: medium, evidence: 'setResult(resultCode, data) forwards a result from an implicit-intent activity'}
+  - {file: oversecured/ovaa/activities/DeeplinkActivity.java, vuln_class: insecure_webview, line_range: [50, 53], severity: medium, evidence: 'host.endsWith("example.com") check before loading url in WebViewActivity'}
+  - {file: oversecured/ovaa/activities/WebViewActivity.java, vuln_class: insecure_webview, line_range: [20, 27], severity: high, evidence: 'loadUrl(getIntent().getStringExtra("url")) with JavaScript and setAllowFileAccessFromFileURLs(true)'}
+  - {file: oversecured/ovaa/activities/MainActivity.java, vuln_class: intent_redirection, line_range: [45, 47], severity: high, evidence: 'implicit broadcast UNPROTECTED_CREDENTIALS_DATA with getLoginData()', cwe: CWE-927}
+  - {file: oversecured/ovaa/activities/MainActivity.java, vuln_class: intent_redirection, line_range: [55, 58], severity: medium, evidence: 'implicit intent with token resolved by protectActivityIntent (first match, any package)', cwe: CWE-927}
+  - {file: oversecured/ovaa/activities/MainActivity.java, vuln_class: insecure_network, line_range: [56, 56], severity: medium, evidence: '"http://example.com./?token=" + token'}
+  - {file: oversecured/ovaa/network/RetrofitInstance.java, vuln_class: insecure_network, line_range: [7, 7], alt_ranges: [[12, 12]], severity: medium, evidence: 'BASE_URL = "http://example.com./api/v1/"'}
+  - {file: oversecured/ovaa/utils/WeakCrypto.java, vuln_class: hardcoded_secret, line_range: [9, 9], severity: high, evidence: 'KEY = "49u5gh249gh24985ghf429gh4ch8f23f"'}
+  - {file: oversecured/ovaa/utils/WeakCrypto.java, vuln_class: weak_crypto, line_range: [16, 18], severity: medium, evidence: 'Cipher.getInstance("AES") defaults to ECB with a constant key'}
+  - {file: oversecured/ovaa/utils/LoginUtils.java, vuln_class: insecure_storage, line_range: [38, 40], severity: high, evidence: 'putString(PASSWORD_KEY, loginData.password) into plain SharedPreferences'}
+  - {file: oversecured/ovaa/utils/FileUtils.java, vuln_class: insecure_storage, line_range: [28, 31], severity: low, evidence: 'copies picked content to getExternalCacheDir()'}
+ignore:
+  - {file: AndroidManifest.xml, line_range: [6, 6], reason: allowBackup, outside v1 classes}
+  - {file: AndroidManifest.xml, line_range: [7, 14], reason: browsable deep-link activity}
+  - {file: AndroidManifest.xml, line_range: [52, 54], reason: FileProvider root-path oversharing}
+  - {file: oversecured/ovaa/providers/TheftOverwriteProvider.java, line_range: [46, 50], reason: path traversal in openFile}
+  - {file: oversecured/ovaa/providers/CredentialsProvider.java, line_range: [14, 20], reason: credentials via grantable provider (URI-grant chain)}
+  - {file: oversecured/ovaa/services/InsecureLoggerService.java, line_range: [21, 56], reason: arbitrary file write from intent extra}
+  - {file: oversecured/ovaa/OversecuredApplication.java, line_range: [24, 54], reason: code loading from /sdcard and other packages}
+  - {file: oversecured/ovaa/activities/LoginActivity.java, line_range: [58, 75], reason: credentials logged}
+  - {file: oversecured/ovaa/activities/MainActivity.java, line_range: [63, 71], reason: trusts content URI returned by picker}
+  - {file: oversecured/ovaa/objects/DeleteFilesSerializable.java, line_range: [1, 17], reason: unsafe deserialization}
+  - {file: oversecured/ovaa/objects/MemoryCorruptionParcelable.java, line_range: [1, 45], reason: unsafe deserialization}
+  - {file: oversecured/ovaa/objects/MemoryCorruptionSerializable.java, line_range: [1, 23], reason: native memory corruption}

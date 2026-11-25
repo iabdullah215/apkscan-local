@@ -1,0 +1,126 @@
+{
+ "false_negatives": [
+  {
+   "file": "com/android/insecurebankv2/MyBroadCastReceiver.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    17,
+    32
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/TrackUserContentProvider.java",
+   "vuln_class": "provider_sqli",
+   "line_range": [
+    78,
+    89
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ViewStatement.java",
+   "vuln_class": "insecure_webview",
+   "line_range": [
+    28,
+    33
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoLogin.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    139,
+    149
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    36,
+    40
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    61,
+    65
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "insecure_webview",
+   "line_range": [
+    52,
+    55
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/MainActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    49,
+    52
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/LoginUtils.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    36,
+    38
+   ]
+  }
+ ],
+ "false_positives": [
+  {
+   "file": "com/android/insecurebankv2/ChangePassword.java",
+   "vuln_class": "hardcoded_secret",
+   "line_range": [
+    45,
+    45
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ViewStatement.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    25,
+    25
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ViewStatement.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    29,
+    29
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/LoginActivity.java",
+   "vuln_class": "hardcoded_secret",
+   "line_range": [
+    24,
+    24
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/LoginUtils.java",
+   "vuln_class": "hardcoded_secret",
+   "line_range": [
+    12,
+    12
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/LoginUtils.java",
+   "vuln_class": "hardcoded_secret",
+   "line_range": [
+    13,
+    13
+   ]
+  }
+ ]
+}

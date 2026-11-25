@@ -1,0 +1,125 @@
+{
+  "name": "src-base-q4-zeroshot",
+  "split": "test_src",
+  "gguf": "models/gguf/base-Q4_K_M.gguf",
+  "few_shot": 0,
+  "prompt_version": "v2",
+  "prompt_style": "full",
+  "empty_bias": 0.0,
+  "chunks": 49,
+  "gold_findings": 36,
+  "json_valid_strict": 0.0,
+  "json_parsed": 0.837,
+  "schema_valid": 0.796,
+  "overall": {
+    "tp": 6,
+    "fp": 15,
+    "fn": 30,
+    "precision": 0.286,
+    "recall": 0.167,
+    "f1": 0.211,
+    "macro_f1": 0.197
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 10,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "insecure_webview": {
+      "tp": 3,
+      "fp": 6,
+      "fn": 1,
+      "precision": 0.333,
+      "recall": 0.75,
+      "f1": 0.462
+    },
+    "hardcoded_secret": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "weak_crypto": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.667
+    },
+    "insecure_network": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0.333,
+      "recall": 0.2,
+      "f1": 0.25
+    },
+    "insecure_storage": {
+      "tp": 1,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.2,
+      "recall": 0.2,
+      "f1": 0.2
+    },
+    "provider_sqli": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "intent_redirection": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 7,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "per_app": {
+    "insecurebankv2-src": {
+      "tp": 1,
+      "fp": 12,
+      "fn": 18,
+      "precision": 0.077,
+      "recall": 0.053,
+      "f1": 0.062,
+      "macro_f1": 0.031
+    },
+    "ovaa-src": {
+      "tp": 5,
+      "fp": 4,
+      "fn": 12,
+      "precision": 0.556,
+      "recall": 0.294,
+      "f1": 0.385,
+      "macro_f1": 0.424
+    }
+  },
+  "outcome_counts": {
+    "tp": 6,
+    "fp": 15,
+    "dup": 0,
+    "ignored": 14
+  },
+  "wall_s": 187.5,
+  "perf": {
+    "prompt_tok_per_s": 1096.4,
+    "gen_tok_per_s": 68.9,
+    "prompt_tokens": 63348,
+    "completion_tokens": 8832,
+    "avg_s_per_chunk": 3.8,
+    "peak_rss_mb": 2838,
+    "gguf_mb": 986
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "run": "v2",
+  "git": "none",
+  "train_sha256_16": "2791f1d575947dfd",
+  "train_seconds": 3531,
+  "config": "# MLX-LM LoRA config for apkscan-local v2: short prompt, decision-weighted loss (train/train_weighted.py) (Apple M4, 16 GB).\nmodel: models/base/Qwen2.5-Coder-1.5B-Instruct\ntrain: true\ndata: data/processed\nfine_tune_type: lora\noptimizer: adamw\nmask_prompt: true          # loss only on the assistant JSON\nnum_layers: 16             # LoRA on the last 16 of 28 blocks\nbatch_size: 2\ngrad_accumulation_steps: 1\niters: 600                 # about 1.5 epochs over 780 records (batch 2); batch 4 stalled in swap on 16 GB\nlearning_rate: 1.5e-4\nlr_schedule:\n  name: linear_schedule   # warmup then constant 1.5e-4 (v1 decayed to 1e-6 and under-trained the decision)\n  warmup: 30\n  arguments: [1.5e-4, 1.5e-4, 600]\nmax_seq_length: 2304\ngrad_checkpoint: true\nsteps_per_report: 10\nsteps_per_eval: 100\nval_batches: 20\nsave_every: 100\nadapter_path: models/adapters/v2\nseed: 0\nlora_parameters:\n  keys: [\"self_attn.q_proj\", \"self_attn.k_proj\", \"self_attn.v_proj\", \"self_attn.o_proj\", \"mlp.gate_proj\", \"mlp.up_proj\", \"mlp.down_proj\"]\n  rank: 16\n  scale: 2.0\n  dropout: 0.05\n",
+  "first_token_weight": "10",
+  "val_losses": [
+    "1.662",
+    "0.434",
+    "0.182",
+    "0.112",
+    "0.089",
+    "0.075",
+    "0.101"
+  ],
+  "last_train_loss": [
+    "0.134"
+  ],
+  "peak_mem_gb": null,
+  "machine": "macOS-27.2.1-arm64-arm-64bit",
+  "mlx_lm": "0.32.2"
+}

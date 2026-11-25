@@ -1,0 +1,122 @@
+{
+  "name": "base-f16-zeroshot",
+  "gguf": "models/gguf/base-F16.gguf",
+  "few_shot": 0,
+  "prompt_version": "v1",
+  "chunks": 48,
+  "gold_findings": 36,
+  "json_valid_strict": 0.0,
+  "json_parsed": 0.833,
+  "schema_valid": 0.812,
+  "overall": {
+    "tp": 7,
+    "fp": 19,
+    "fn": 29,
+    "precision": 0.269,
+    "recall": 0.194,
+    "f1": 0.226,
+    "macro_f1": 0.21
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 2,
+      "fp": 3,
+      "fn": 8,
+      "precision": 0.4,
+      "recall": 0.2,
+      "f1": 0.267
+    },
+    "insecure_webview": {
+      "tp": 2,
+      "fp": 5,
+      "fn": 2,
+      "precision": 0.286,
+      "recall": 0.5,
+      "f1": 0.364
+    },
+    "hardcoded_secret": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "weak_crypto": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.667
+    },
+    "insecure_network": {
+      "tp": 1,
+      "fp": 5,
+      "fn": 4,
+      "precision": 0.167,
+      "recall": 0.2,
+      "f1": 0.182
+    },
+    "insecure_storage": {
+      "tp": 1,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.2,
+      "recall": 0.2,
+      "f1": 0.2
+    },
+    "provider_sqli": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "intent_redirection": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 7,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "per_app": {
+    "insecurebankv2": {
+      "tp": 1,
+      "fp": 13,
+      "fn": 18,
+      "precision": 0.071,
+      "recall": 0.053,
+      "f1": 0.061,
+      "macro_f1": 0.036
+    },
+    "ovaa": {
+      "tp": 6,
+      "fp": 6,
+      "fn": 11,
+      "precision": 0.5,
+      "recall": 0.353,
+      "f1": 0.414,
+      "macro_f1": 0.488
+    }
+  },
+  "outcome_counts": {
+    "tp": 7,
+    "fp": 19,
+    "dup": 0,
+    "ignored": 10
+  },
+  "wall_s": 270.2,
+  "perf": {
+    "prompt_tok_per_s": 2017.5,
+    "gen_tok_per_s": 31.7,
+    "prompt_tokens": 58145,
+    "completion_tokens": 7586,
+    "avg_s_per_chunk": 5.59,
+    "peak_rss_mb": 4029,
+    "gguf_mb": 3094
+  }
+}

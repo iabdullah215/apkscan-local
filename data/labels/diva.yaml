@@ -1,0 +1,29 @@
+# DIVA (payatu/diva-android, GPL-3.0), commit 2bb63b53, Java source. Training split.
+# All 20 files read. Line numbers refer to data/scan/diva/ (manifest normalized).
+# The manifest has no android:exported attributes and the app targets SDK 23, so activities
+# with an intent-filter are exported by default.
+app: diva
+split: train
+findings:
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [22, 27], severity: high, evidence: 'APICredsActivity has an intent-filter (exported by default on targetSdk < 31) and no permission', why: 'Any app can start APICredsActivity with the VIEW_CREDS action and see the API credentials it displays.'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [29, 34], severity: high, evidence: 'APICreds2Activity has an intent-filter (exported by default) and no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [35, 35], severity: high, evidence: 'NotesProvider android:exported="true" without permission', why: 'Any app can query or modify the private notes through content://jakhar.aseem.diva.provider.notesprovider/notes, bypassing the PIN screen.'}
+  - {file: jakhar/aseem/diva/HardcodeActivity.java, vuln_class: hardcoded_secret, line_range: [50, 50], severity: medium, evidence: 'access key compared to the literal "vendorsecretkey"', why: 'The access key is visible to anyone who decompiles the APK.', fix: 'Verify access keys on the server instead of comparing against a literal in the app.'}
+  - {file: jakhar/aseem/diva/APICredsActivity.java, vuln_class: hardcoded_secret, line_range: [47, 47], severity: high, evidence: '"API Key: 123secretapikey123 ... API Password: p@ssword" literal'}
+  - {file: jakhar/aseem/diva/APICreds2Activity.java, vuln_class: hardcoded_secret, line_range: [59, 59], severity: high, evidence: '"TVEETER API Key: secrettveeterapikey ... API Password: p@ssword2" literal'}
+  - {file: jakhar/aseem/diva/APICreds2Activity.java, vuln_class: intent_redirection, line_range: [53, 62], severity: high, cwe: CWE-940, evidence: 'getBooleanExtra(chk_pin, true) == false skips the PIN check and shows credentials', why: 'A caller can start this exported activity with the chk_pin extra set to false and get the credentials without a PIN.', fix: 'Do not let intent extras decide whether authentication is required; enforce the check inside the activity.'}
+  - {file: jakhar/aseem/diva/InsecureDataStorage1Activity.java, vuln_class: insecure_storage, line_range: [51, 58], severity: high, cwe: CWE-312, evidence: 'putString("password", pwd) in default SharedPreferences'}
+  - {file: jakhar/aseem/diva/InsecureDataStorage2Activity.java, vuln_class: insecure_storage, line_range: [63, 68], severity: high, cwe: CWE-312, evidence: 'credentials inserted in plaintext into SQLite table myuser'}
+  - {file: jakhar/aseem/diva/InsecureDataStorage3Activity.java, vuln_class: insecure_storage, line_range: [58, 66], severity: medium, cwe: CWE-312, evidence: 'user:password written in plaintext to a temp file in the data dir'}
+  - {file: jakhar/aseem/diva/InsecureDataStorage4Activity.java, vuln_class: insecure_storage, line_range: [57, 65], severity: high, cwe: CWE-922, evidence: 'user:password written to external storage /.uinfo.txt'}
+  - {file: jakhar/aseem/diva/AccessControl3Activity.java, vuln_class: insecure_storage, line_range: [62, 73], severity: medium, cwe: CWE-312, evidence: 'PIN saved in plaintext default SharedPreferences'}
+  - {file: jakhar/aseem/diva/InputValidation2URISchemeActivity.java, vuln_class: insecure_webview, line_range: [50, 58], severity: low, evidence: 'JavaScript-enabled WebView loads any URL typed by the user, including file:// URLs', why: 'With file access enabled by default on older Android, file:// URLs can display app-private files and any page runs JavaScript.', fix: 'Allow only https URLs to allowlisted hosts and call setAllowFileAccess(false).'}
+  - {file: jakhar/aseem/diva/NotesProvider.java, vuln_class: provider_sqli, line_range: [168, 190], severity: high, evidence: 'caller selection and sortOrder passed to SQLiteQueryBuilder.query in an exported provider'}
+  - {file: jakhar/aseem/diva/NotesProvider.java, vuln_class: provider_sqli, line_range: [117, 120], severity: high, evidence: 'selection concatenated into the delete WHERE clause'}
+  - {file: jakhar/aseem/diva/NotesProvider.java, vuln_class: provider_sqli, line_range: [207, 210], severity: high, evidence: 'selection concatenated into the update WHERE clause'}
+ignore:
+  - {file: jakhar/aseem/diva/SQLInjectionActivity.java, line_range: [51, 87], reason: SQL injection in an activity (not a provider) and seed data, outside v1 classes}
+  - {file: jakhar/aseem/diva/LogActivity.java, line_range: [56, 56], reason: credit card logged, outside v1 classes}
+  - {file: jakhar/aseem/diva/AccessControl1Activity.java, line_range: [51, 56], reason: implicit intent without sensitive data}
+  - {file: jakhar/aseem/diva/AccessControl2Activity.java, line_range: [53, 61], reason: implicit intent; issue is in the receiving exported activity}
+  - {file: AndroidManifest.xml, line_range: [6, 6], reason: allowBackup, outside v1 classes}

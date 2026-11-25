@@ -1,0 +1,162 @@
+# OWASP MASTG demos (CC-BY-SA-4.0), commit e8183038, demos/android. Training split.
+# Each demo is its own "app" for splitting. Code is MASTG's jadx-reversed Java (MastgTest_reversed.java etc.).
+# Manifest line numbers refer to the normalized manifest (apkscan.chunking.normalize_xml).
+# Labels read from each file; MASTG output.txt/evaluation used as a cross-check, not copied blindly.
+split: train
+kind: mastg
+base: data/raw/mastg/demos/android
+demos:
+  - id: "0007"
+    dir: MASVS-CRYPTO/MASTG-DEMO-0007
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [22, 23], severity: low, cwe: CWE-330, evidence: 'new Random().nextDouble() and Math.random()'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [24, 27], severity: medium, cwe: CWE-330, evidence: 'password characters chosen with java.util.Random', why: 'java.util.Random is a predictable PRNG, so a generated password can be reproduced from its seed or a few outputs.', fix: 'Generate passwords and tokens with java.security.SecureRandom.'}
+  - id: "0008"
+    dir: MASVS-CRYPTO/MASTG-DEMO-0008
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [22, 24], severity: low, cwe: CWE-330, evidence: '(int) new Date().getTime() and Calendar millis used as random numbers', why: 'Time values are guessable, so anything derived from them as a random value can be predicted.', fix: 'Use java.security.SecureRandom for any value that must be unpredictable.'}
+  - id: "0017"
+    dir: MASVS-CRYPTO/MASTG-DEMO-0017
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [24, 24], alt_ranges: [[26, 26]], severity: high, cwe: CWE-321, evidence: 'byte[] keyBytes = {108, 97, 107, ...} used as an AES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [28, 30], severity: medium, cwe: CWE-321, evidence: '"my secret here".getBytes() used as a SecretKeySpec'}
+  - id: "0022"
+    dir: MASVS-CRYPTO/MASTG-DEMO-0022
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [39, 39], severity: medium, evidence: 'Cipher.getInstance("DES")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [62, 62], severity: medium, evidence: 'Cipher.getInstance("DESede")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [81, 81], severity: medium, evidence: 'Cipher.getInstance("RC4")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [100, 100], severity: medium, evidence: 'Cipher.getInstance("Blowfish")'}
+  - id: "0023"
+    dir: MASVS-CRYPTO/MASTG-DEMO-0023
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [33, 33], severity: high, cwe: CWE-321, evidence: '"1234567890123456".getBytes() as AES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [36, 36], severity: medium, evidence: 'Cipher.getInstance("AES") defaults to ECB'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [52, 52], severity: high, cwe: CWE-321, evidence: '"1234567890123456".getBytes() as AES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [55, 55], severity: medium, evidence: 'Cipher.getInstance("AES/ECB/NoPadding")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [73, 73], severity: high, cwe: CWE-321, evidence: '"1234567890123456".getBytes() as AES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [76, 76], severity: medium, evidence: 'Cipher.getInstance("AES/ECB/PKCS5Padding")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [92, 92], severity: high, cwe: CWE-321, evidence: '"1234567890123456".getBytes() as AES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [95, 95], severity: medium, evidence: 'Cipher.getInstance("AES/ECB/ISO10126Padding")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [111, 111], severity: high, cwe: CWE-321, evidence: '"12345678".getBytes() as DES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [118, 118], severity: medium, evidence: 'Cipher.getInstance("DES/ECB/PKCS5Padding")'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: hardcoded_secret, line_range: [134, 134], severity: high, cwe: CWE-321, evidence: '"123456789012345678901234".getBytes() as 3DES key'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: weak_crypto, line_range: [141, 141], severity: medium, evidence: 'Cipher.getInstance("DESede/ECB/PKCS5Padding")'}
+  - id: "0048"
+    dir: MASVS-NETWORK/MASTG-DEMO-0048
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_network, line_range: [38, 41], severity: high, cwe: CWE-297, evidence: 'SSLSocket created and used without HostnameVerifier.verify', why: 'SSLSocket does not check the hostname, so a valid certificate for any other domain is accepted and the connection can be intercepted.', fix: 'Verify the session with HttpsURLConnection.getDefaultHostnameVerifier().verify(host, socket.getSession()) or use HttpsURLConnection.'}
+  - id: "0049"
+    dir: MASVS-NETWORK/MASTG-DEMO-0049
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings: []
+  - id: "0054"
+    dir: MASVS-NETWORK/MASTG-DEMO-0054
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_network, line_range: [93, 94], alt_ranges: [[87, 103]], severity: high, cwe: CWE-295, evidence: 'trust-all X509TrustManager installed on HttpsURLConnection'}
+  - id: "0055"
+    dir: MASVS-NETWORK/MASTG-DEMO-0055
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_network, line_range: [94, 96], alt_ranges: [[69, 74]], severity: high, cwe: CWE-295, evidence: 'HostnameVerifier lambda returns true for every host'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_network, line_range: [107, 108], alt_ranges: [[101, 117]], severity: high, cwe: CWE-295, evidence: 'trust-all X509TrustManager installed on HttpsURLConnection'}
+  - id: "0056"
+    dir: MASVS-NETWORK/MASTG-DEMO-0056
+    files: {org/owasp/mastestapp/MastgTestWebView.java: MastgTestWebView_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, vuln_class: insecure_network, line_range: [28, 35], severity: high, cwe: CWE-295, evidence: 'onReceivedSslError logs and calls handler.proceed()'}
+  - id: "0029"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0029
+    files: {org/owasp/mastestapp/MastgTestWebView.java: MastgTestWebView_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, vuln_class: insecure_webview, line_range: [28, 30], severity: high, evidence: 'setJavaScriptEnabled(true) + setAllowUniversalAccessFromFileURLs(true) with a file:/// base URL'}
+    ignore:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, line_range: [25, 26], reason: demo seed data}
+  - id: "0032"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0032
+    files: {org/owasp/mastestapp/MastgTestWebView.java: MastgTestWebView_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, vuln_class: insecure_webview, line_range: [30, 34], severity: high, evidence: 'setAllowFileAccess(true) and setAllowFileAccessFromFileURLs(true) with JavaScript and a file:/// base URL'}
+    ignore:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, line_range: [26, 28], reason: demo seed data}
+  - id: "0097"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0097
+    files: {org/owasp/mastestapp/MastgTestWebView.java: MastgTestWebView_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, vuln_class: insecure_webview, line_range: [84, 85], alt_ranges: [[37, 56]], severity: high, evidence: 'addJavascriptInterface(new SupportBridge(), "MASBridge") exposes getUserProfileJson including the JWT', why: 'Any script that runs in this WebView, including injected or third-party content, can call MASBridge.getUserProfileJson() and read the stored JWT and profile.', fix: 'Do not expose tokens through a JavaScript bridge; restrict bridge methods to non-sensitive actions and only load trusted content.'}
+    ignore:
+      - {file: org/owasp/mastestapp/MastgTestWebView.java, line_range: [91, 96], reason: demo seed data}
+  - id: "0147"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0147
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: intent_redirection, line_range: [24, 25], severity: medium, cwe: CWE-927, evidence: 'PendingIntent.getActivity with an implicit VIEW intent and mutable flags', why: 'An app that receives this PendingIntent can fill in the implicit intent and make it run with this app identity.', fix: 'Use an explicit intent and FLAG_IMMUTABLE.'}
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: intent_redirection, line_range: [30, 31], severity: medium, cwe: CWE-927, evidence: 'PendingIntent.getBroadcast with an implicit action and flags 0 (mutable)', why: 'The implicit, mutable broadcast PendingIntent can be redirected by whoever holds it.', fix: 'Set the package or component and use FLAG_IMMUTABLE.'}
+    ignore:
+      - {file: org/owasp/mastestapp/MastgTest.java, line_range: [27, 28], reason: explicit but mutable PendingIntent, lower risk}
+  - id: "0102"
+    dir: MASVS-CODE/MASTG-DEMO-0102
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java, AndroidManifest.xml: AndroidManifest_reversed.xml}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: provider_sqli, line_range: [93, 99], alt_ranges: [[105, 105]], severity: high, evidence: 'qb.appendWhere("id=" + id) and qb.appendWhere(filter) from URI path segments', why: 'Path segments of the content URI are appended to the WHERE clause, so a calling app can inject SQL and read other rows or tables.', fix: 'Parse the id as a number or use selection "id = ?" with selectionArgs, never append URI segments; set qb.setStrict(true).'}
+      - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [14, 14], severity: high, evidence: 'StudentProvider exported="true" without permission'}
+    ignore:
+      - {file: AndroidManifest.xml, line_range: [15, 16], reason: androidx debug/test activities from libraries}
+      - {file: org/owasp/mastestapp/MastgTest.java, line_range: [30, 32], reason: demo instructions}
+  - id: "0136"
+    dir: MASVS-CODE/MASTG-DEMO-0136
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: intent_redirection, line_range: [22, 28], severity: medium, cwe: CWE-927, evidence: 'implicit intent INTERNAL_ACTION with session_token extra passed to startActivity', why: 'Another app can declare the same action and receive the session token.', fix: 'Use an explicit intent (setClass or setComponent) for internal navigation.'}
+  - id: "0152"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0152
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java, org/owasp/mastestapp/DeepLinkActivity.java: DeepLinkActivity_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: intent_redirection, line_range: [25, 29], severity: medium, cwe: CWE-940, evidence: 'amount from a deep link query parameter drives processTransfer without validation', why: 'Any web page or app can open the custom scheme link and trigger a transfer with an attacker-chosen amount.', fix: 'Validate deep link parameters and require explicit user confirmation before sensitive actions.'}
+    ignore:
+      - {file: org/owasp/mastestapp/MastgTest.java, line_range: [20, 24], reason: demo instructions}
+  - id: "0121"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0121
+    files: {AndroidManifest.xml: AndroidManifest_reversed.xml}
+    findings:
+      - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [14, 14], severity: high, evidence: 'AppointmentProvider exported="true" without permission'}
+    ignore:
+      - {file: AndroidManifest.xml, line_range: [15, 16], reason: androidx debug/test activities from libraries}
+  - id: "0128"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0128
+    files: {AndroidManifest.xml: AndroidManifest_reversed.xml}
+    findings:
+      - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [15, 15], severity: medium, evidence: 'SecretActivity exported="true" without permission'}
+    ignore:
+      - {file: AndroidManifest.xml, line_range: [16, 17], reason: androidx debug/test activities from libraries}
+  - id: "0129"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0129
+    files: {AndroidManifest.xml: AndroidManifest_reversed.xml}
+    findings:
+      - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [15, 15], severity: high, evidence: 'AuthService exported="true" without permission'}
+    ignore:
+      - {file: AndroidManifest.xml, line_range: [16, 17], reason: androidx debug/test activities from libraries}
+  - id: "0130"
+    dir: MASVS-PLATFORM/MASTG-DEMO-0130
+    files: {AndroidManifest.xml: AndroidManifest_reversed.xml}
+    findings:
+      - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [15, 19], severity: high, evidence: 'PasswordResetReceiver exported="true" without permission'}
+    ignore:
+      - {file: AndroidManifest.xml, line_range: [20, 21], reason: androidx debug/test activities from libraries}
+  - id: "0003"
+    dir: MASVS-STORAGE/MASTG-DEMO-0003
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_storage, line_range: [27, 35], severity: medium, cwe: CWE-922, evidence: 'secret written to Environment.getExternalStorageDirectory()/secret.txt'}
+  - id: "0004"
+    dir: MASVS-STORAGE/MASTG-DEMO-0004
+    files: {org/owasp/mastestapp/MastgTest.java: MastgTest_reversed.java}
+    findings:
+      - {file: org/owasp/mastestapp/MastgTest.java, vuln_class: insecure_storage, line_range: [25, 32], severity: low, cwe: CWE-922, evidence: 'password written in plaintext to getExternalFilesDir(null)/secret.txt'}

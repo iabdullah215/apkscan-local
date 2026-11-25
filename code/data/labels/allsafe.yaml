@@ -1,0 +1,45 @@
+# allsafe (t0thkr1s/allsafe-android, Apache-2.0), commit c7329155, Java/Kotlin source. Training split.
+# Only reviewed_files are used for training (each read in full); other files are excluded so
+# unlabeled issues never become false negatives in training targets.
+app: allsafe
+split: train
+reviewed_files:
+  - AndroidManifest.xml
+  - res/xml/network_security_config.xml
+  - infosecadventures/allsafe/ProxyActivity.java
+  - infosecadventures/allsafe/challenges/WeakCryptography.java
+  - infosecadventures/allsafe/challenges/CertificatePinning.java
+  - infosecadventures/allsafe/challenges/RecorderService.java
+  - infosecadventures/allsafe/challenges/DataProvider.java
+  - infosecadventures/allsafe/challenges/InsecureSharedPreferences.java
+  - infosecadventures/allsafe/challenges/VulnerableWebView.java
+  - infosecadventures/allsafe/challenges/InsecureBroadcastReceiver.java
+  - infosecadventures/allsafe/challenges/NoteReceiver.java
+  - infosecadventures/allsafe/challenges/HardcodedCredentials.kt
+  - infosecadventures/allsafe/challenges/InsecureService.java
+  - infosecadventures/allsafe/challenges/InsecureProviders.kt
+findings:
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [10, 10], severity: high, evidence: 'ProxyActivity android:exported="true" without permission', why: 'Any app can start ProxyActivity, which launches whatever Intent it is given, so other apps reach every non-exported component.'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [31, 35], severity: high, evidence: 'NoteReceiver android:exported="true" without permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [36, 36], severity: high, evidence: 'RecorderService android:exported="true" without permission', why: 'Any app can start RecorderService and make this app record the microphone.'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [37, 37], severity: high, evidence: 'DataProvider android:exported="true" without permission'}
+  - {file: res/xml/network_security_config.xml, vuln_class: insecure_network, line_range: [3, 3], severity: medium, cwe: CWE-319, evidence: 'domain-config cleartextTrafficPermitted="true"', why: 'Cleartext HTTP is permitted, so requests (including the auth token sent by NoteReceiver) can be read on the network.', fix: 'Set cleartextTrafficPermitted="false" and use HTTPS.'}
+  - {file: infosecadventures/allsafe/ProxyActivity.java, vuln_class: intent_redirection, line_range: [12, 12], severity: high, cwe: CWE-940, evidence: 'startActivity(getIntent().getParcelableExtra("extra_intent"))'}
+  - {file: infosecadventures/allsafe/challenges/WeakCryptography.java, vuln_class: hardcoded_secret, line_range: [30, 30], severity: high, cwe: CWE-321, evidence: 'KEY = "1nf053c4dv3n7ur3"'}
+  - {file: infosecadventures/allsafe/challenges/WeakCryptography.java, vuln_class: weak_crypto, line_range: [35, 35], severity: medium, evidence: 'Cipher.getInstance("AES/ECB/PKCS5PADDING")'}
+  - {file: infosecadventures/allsafe/challenges/WeakCryptography.java, vuln_class: weak_crypto, line_range: [53, 55], severity: medium, cwe: CWE-328, evidence: 'MessageDigest.getInstance("MD5") used to hash user secrets'}
+  - {file: infosecadventures/allsafe/challenges/WeakCryptography.java, vuln_class: weak_crypto, line_range: [64, 65], severity: low, cwe: CWE-330, evidence: 'new Random().nextInt(100000) used as a random number'}
+  - {file: infosecadventures/allsafe/challenges/RecorderService.java, vuln_class: insecure_storage, line_range: [73, 79], severity: medium, cwe: CWE-922, evidence: 'microphone recordings written to the public Downloads directory'}
+  - {file: infosecadventures/allsafe/challenges/DataProvider.java, vuln_class: provider_sqli, line_range: [28, 31], severity: high, evidence: 'caller projection, selection and sortOrder passed to SQLiteQueryBuilder.query in an exported provider'}
+  - {file: infosecadventures/allsafe/challenges/InsecureSharedPreferences.java, vuln_class: insecure_storage, line_range: [36, 40], severity: high, cwe: CWE-312, evidence: 'putString("password", ...) in plain SharedPreferences'}
+  - {file: infosecadventures/allsafe/challenges/VulnerableWebView.java, vuln_class: insecure_webview, line_range: [33, 44], severity: medium, evidence: 'JavaScript and setAllowFileAccess(true) enabled, then user payload loaded with loadUrl/loadData'}
+  - {file: infosecadventures/allsafe/challenges/InsecureBroadcastReceiver.java, vuln_class: intent_redirection, line_range: [31, 44], severity: medium, cwe: CWE-927, evidence: 'note sent to every receiver of PROCESS_NOTE found by queryBroadcastReceivers, including other apps', why: 'Any app that registers for PROCESS_NOTE receives the user note.', fix: 'Send the broadcast only to this app with setPackage(getPackageName()) or a signature permission.'}
+  - {file: infosecadventures/allsafe/challenges/NoteReceiver.java, vuln_class: intent_redirection, line_range: [33, 48], severity: high, cwe: CWE-925, evidence: '"server" extra from any sender decides where the request with auth_token is sent', why: 'Another app can broadcast PROCESS_NOTE with its own server and receive the auth token and note.', fix: 'Protect the receiver with a signature permission and never take the destination host from intent extras.'}
+  - {file: infosecadventures/allsafe/challenges/NoteReceiver.java, vuln_class: insecure_network, line_range: [40, 40], severity: medium, cwe: CWE-319, evidence: 'HttpUrl.Builder().scheme("http")'}
+  - {file: infosecadventures/allsafe/challenges/NoteReceiver.java, vuln_class: hardcoded_secret, line_range: [46, 46], severity: high, evidence: 'auth_token "YWxsc2FmZV9kZXZfYWRtaW5fdG9rZW4=" literal'}
+  - {file: infosecadventures/allsafe/challenges/HardcodedCredentials.kt, vuln_class: hardcoded_secret, line_range: [50, 51], severity: high, evidence: 'SOAP header with UsernameToken superadmin and PasswordText supersecurepassword'}
+ignore:
+  - {file: AndroidManifest.xml, line_range: [9, 9], reason: debuggable and allowBackup, outside v1 classes}
+  - {file: AndroidManifest.xml, line_range: [11, 24], reason: browsable deep link activity}
+  - {file: infosecadventures/allsafe/challenges/NoteReceiver.java, line_range: [50, 50], reason: logs URL with token}
+  - {file: infosecadventures/allsafe/challenges/InsecureProviders.kt, line_range: [18, 30], reason: Firebase storage misconfiguration, outside v1 classes}

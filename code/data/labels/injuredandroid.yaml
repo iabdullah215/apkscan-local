@@ -1,0 +1,41 @@
+# InjuredAndroid (B3nac/InjuredAndroid, Apache-2.0), commit 2cc669a1, Java/Kotlin source. Training split.
+# Only reviewed_files (each read in full) are used. The manifest has no targetSdk here; activities
+# without android:exported and without an intent-filter are not exported.
+app: injuredandroid
+split: train
+reviewed_files:
+  - AndroidManifest.xml
+  - res/xml/network_security_config.xml
+  - b3nac/injuredandroid/ExportedProtectedIntent.java
+  - b3nac/injuredandroid/FlagFiveReceiver.kt
+  - b3nac/injuredandroid/TestBroadcastReceiver.java
+  - b3nac/injuredandroid/VGV4dEVuY3J5cHRpb25Ud28.java
+  - b3nac/injuredandroid/SecureSharedPrefs.kt
+  - b3nac/injuredandroid/FlagTwelveProtectedActivity.kt
+  - b3nac/injuredandroid/Decoder.java
+  - b3nac/injuredandroid/Hide.java
+  - b3nac/injuredandroid/DisplayPostXSS.kt
+  - b3nac/injuredandroid/b25lActivity.kt
+  - b3nac/injuredandroid/QXV0aA.kt
+findings:
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [4, 4], severity: medium, evidence: 'FlagEighteenActivity android:exported="true" without permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [29, 29], severity: high, evidence: 'ExportedProtectedIntent android:exported="true" without permission', why: 'Any app can start ExportedProtectedIntent, which forwards a nested Intent to this app''s non-exported activities.'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [30, 30], severity: medium, evidence: 'QXV0aA android:exported="true" without permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [62, 62], severity: medium, evidence: 'b25lActivity android:exported="true" without permission', why: 'Any app can open b25lActivity directly and skip the login screen that normally leads to it.'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [66, 66], severity: high, evidence: 'FlagFiveReceiver android:exported="true" without permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [68, 68], severity: medium, evidence: 'TestBroadcastReceiver activity android:exported="true" without permission'}
+  - {file: res/xml/network_security_config.xml, vuln_class: insecure_network, line_range: [3, 3], severity: medium, cwe: CWE-319, evidence: 'base-config cleartextTrafficPermitted="true"', why: 'Cleartext HTTP is allowed for every host, so app traffic can be read and modified on the network.', fix: 'Set cleartextTrafficPermitted="false" in base-config and use HTTPS.'}
+  - {file: b3nac/injuredandroid/ExportedProtectedIntent.java, vuln_class: intent_redirection, line_range: [37, 44], severity: high, cwe: CWE-940, evidence: 'getParcelableExtra("access_protected_component") started after only checking the target package is this app', why: 'The package check does not help: the caller chooses any non-exported activity of this app and it is launched with the app''s identity.', fix: 'Do not launch Intents taken from extras; map an allowlisted string to a fixed component instead.'}
+  - {file: b3nac/injuredandroid/TestBroadcastReceiver.java, vuln_class: insecure_webview, line_range: [35, 37], alt_ranges: [[16, 17]], severity: medium, evidence: 'receiver registered without permission loads the "url" extra into a WebView', why: 'registerReceiver without a permission (or RECEIVER_NOT_EXPORTED) accepts broadcasts from any app, which then picks the URL the WebView loads.', fix: 'Register with RECEIVER_NOT_EXPORTED or a signature permission and validate the URL against an allowlist.'}
+  - {file: b3nac/injuredandroid/VGV4dEVuY3J5cHRpb25Ud28.java, vuln_class: weak_crypto, line_range: [32, 32], severity: medium, evidence: 'Cipher.getInstance("DES")'}
+  - {file: b3nac/injuredandroid/VGV4dEVuY3J5cHRpb25Ud28.java, vuln_class: weak_crypto, line_range: [55, 55], severity: medium, evidence: 'Cipher.getInstance("DES")'}
+  - {file: b3nac/injuredandroid/VGV4dEVuY3J5cHRpb25Ud28.java, vuln_class: weak_crypto, line_range: [83, 83], severity: medium, evidence: 'Cipher.getInstance("DES")'}
+  - {file: b3nac/injuredandroid/Hide.java, vuln_class: hardcoded_secret, line_range: [6, 7], severity: high, cwe: CWE-321, evidence: 'DES keys stored as Base64 literals "Q2FwdHVyM1RoMXM=" and "e0NhcHR1cjNUaDFzVG9vfQ=="', why: 'Base64 is an encoding, not protection; anyone can decode these keys from the APK and decrypt the data.'}
+  - {file: b3nac/injuredandroid/Decoder.java, vuln_class: hardcoded_secret, line_range: [10, 10], severity: medium, evidence: 'secret stored as Base64 literal "NF9vdmVyZG9uZV9vbWVsZXRz"'}
+  - {file: b3nac/injuredandroid/FlagTwelveProtectedActivity.kt, vuln_class: insecure_webview, line_range: [22, 38], severity: medium, evidence: 'JavaScript-enabled WebView loadData(intent.getStringExtra("totally_secure")) when the scheme is not https', why: 'Whoever controls the intent (for example through ExportedProtectedIntent) runs arbitrary HTML and JavaScript in the app WebView.', fix: 'Do not render HTML from intent extras; keep JavaScript off for untrusted content.'}
+  - {file: b3nac/injuredandroid/DisplayPostXSS.kt, vuln_class: insecure_webview, line_range: [14, 17], severity: low, evidence: 'JavaScript-enabled WebView loadData of text from an intent extra'}
+ignore:
+  - {file: AndroidManifest.xml, line_range: [9, 17], reason: browsable deep link activity}
+  - {file: AndroidManifest.xml, line_range: [20, 27], reason: browsable deep link activity}
+  - {file: AndroidManifest.xml, line_range: [32, 45], reason: browsable deep link activity}
+  - {file: b3nac/injuredandroid/FlagFiveReceiver.kt, line_range: [13, 26], reason: logs intent URI}

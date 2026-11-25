@@ -1,0 +1,22 @@
+decompiling data/raw/apks/ovaa-1.0.0-debug.apk with jadx ...
+22 app files selected (libraries skipped)
+  scanned 1/23 chunks, 1 raw findings  scanned 2/23 chunks, 2 raw findings  scanned 3/23 chunks, 3 raw findings  scanned 4/23 chunks, 4 raw findings  scanned 5/23 chunks, 4 raw findings  scanned 6/23 chunks, 4 raw findings  scanned 7/23 chunks, 5 raw findings  scanned 8/23 chunks, 6 raw findings  scanned 9/23 chunks, 7 raw findings  scanned 10/23 chunks, 7 raw findings  scanned 11/23 chunks, 8 raw findings  scanned 12/23 chunks, 8 raw findings  scanned 13/23 chunks, 9 raw findings  scanned 14/23 chunks, 10 raw findings  scanned 15/23 chunks, 10 raw findings  scanned 16/23 chunks, 11 raw findings  scanned 17/23 chunks, 12 raw findings  scanned 18/23 chunks, 12 raw findings  scanned 19/23 chunks, 12 raw findings  scanned 20/23 chunks, 12 raw findings  scanned 21/23 chunks, 12 raw findings  scanned 22/23 chunks, 13 raw findings  scanned 23/23 chunks, 14 raw findings
+14 findings; reports written
+       65.07 real        46.83 user         2.92 sys
+          6560923648  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              459988  page reclaims
+               99856  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  75  messages sent
+                  54  messages received
+                 115  signals received
+                 897  voluntary context switches
+               75994  involuntary context switches
+          3185857440  instructions retired
+           809675744  cycles elapsed
+            23839200  peak memory footprint

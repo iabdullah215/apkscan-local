@@ -1,0 +1,56 @@
+# The fixed v1 vulnerability classes. Single source of truth for prompts, schema and metrics.
+# Boundary rules keep classes disjoint so one issue gets one label:
+# - hardcoded_secret marks the line where a secret literal is defined.
+# - weak_crypto marks the call site that misuses crypto (algorithm, mode, IV, hash, randomness).
+# - exported_component marks the manifest element; code-level issues in that component get their own class.
+classes:
+  exported_component:
+    title: Exported component without permission protection
+    cwe: [CWE-926]
+    masvs: MASVS-PLATFORM-1
+    where: manifest
+    definition: An activity, service, receiver or provider is reachable by other apps (android:exported="true", or an intent-filter on targetSdk < 31 without android:exported) and has no android:permission. The launcher activity (MAIN/LAUNCHER) is not a finding.
+  insecure_webview:
+    title: Insecure WebView configuration or URL loading
+    cwe: [CWE-749, CWE-79, CWE-939]
+    masvs: MASVS-PLATFORM-2
+    where: code
+    definition: addJavascriptInterface exposed to untrusted content, setAllowFileAccess/setAllowFileAccessFromFileURLs/setAllowUniversalAccessFromFileURLs enabled, loading attacker-controlled or weakly validated URLs (for example endsWith host checks), or shouldOverrideUrlLoading that loads any URL.
+  hardcoded_secret:
+    title: Hardcoded secret
+    cwe: [CWE-798, CWE-321]
+    masvs: MASVS-CRYPTO-2
+    where: code
+    definition: A password, API key, token, private key or symmetric key is defined as a literal in code.
+  weak_crypto:
+    title: Weak or misused cryptography
+    cwe: [CWE-327, CWE-329, CWE-328, CWE-330]
+    masvs: MASVS-CRYPTO-1
+    where: code
+    definition: ECB mode (including Cipher.getInstance("AES") with no mode), static or zero IV, DES/RC4/3DES, MD5 or SHA-1 for passwords or integrity, java.util.Random for security values.
+  insecure_network:
+    title: Cleartext traffic or disabled TLS validation
+    cwe: [CWE-319, CWE-295]
+    masvs: MASVS-NETWORK-1
+    where: both
+    definition: http:// endpoints for app traffic, usesCleartextTraffic="true" or cleartextTrafficPermitted="true", trust-all X509TrustManager, HostnameVerifier that returns true, onReceivedSslError that calls proceed().
+  insecure_storage:
+    title: Insecure local storage of sensitive data
+    cwe: [CWE-922, CWE-312, CWE-276]
+    masvs: MASVS-STORAGE-1
+    where: code
+    definition: Credentials, tokens or personal data written to SharedPreferences or files in plaintext, MODE_WORLD_READABLE/WRITEABLE, or sensitive data written to external storage.
+  provider_sqli:
+    title: SQL injection in a ContentProvider
+    cwe: [CWE-89]
+    masvs: MASVS-CODE-4
+    where: code
+    definition: A ContentProvider builds SQL from caller-controlled selection, sortOrder, projection or URI segments by concatenation or rawQuery/execSQL, in a provider other apps can reach.
+  intent_redirection:
+    title: Intent redirection or unsafe intent handling
+    cwe: [CWE-940, CWE-927, CWE-925]
+    masvs: MASVS-PLATFORM-1
+    where: code
+    definition: An Intent, PendingIntent or URI taken from an incoming Intent is launched, returned via setResult, or trusted without validation; untrusted extras trigger a sensitive action; or sensitive data is sent in an implicit Intent or broadcast.
+
+severities: [high, medium, low]

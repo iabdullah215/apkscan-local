@@ -1,0 +1,29 @@
+# MLX-LM LoRA config for the apkscan-local VERIFIER: candidate window in, {"real": ...} out; FIRST_TOKENS=5 weighted (Apple M4, 16 GB).
+model: models/base/Qwen2.5-Coder-1.5B-Instruct
+train: true
+data: data/processed_verifier
+fine_tune_type: lora
+optimizer: adamw
+mask_prompt: true          # loss only on the assistant JSON
+num_layers: 16             # LoRA on the last 16 of 28 blocks
+batch_size: 2
+grad_accumulation_steps: 1
+iters: 720                 # about 1 epoch over 1444 verifier records (batch 2)
+learning_rate: 1.5e-4
+lr_schedule:
+  name: linear_schedule   # warmup then constant 1.5e-4 (v1 decayed to 1e-6 and under-trained the decision)
+  warmup: 30
+  arguments: [1.5e-4, 1.5e-4, 720]
+max_seq_length: 1024
+grad_checkpoint: true
+steps_per_report: 10
+steps_per_eval: 180
+val_batches: 20
+save_every: 180
+adapter_path: models/adapters/verifier-v1
+seed: 0
+lora_parameters:
+  keys: ["self_attn.q_proj", "self_attn.k_proj", "self_attn.v_proj", "self_attn.o_proj", "mlp.gate_proj", "mlp.up_proj", "mlp.down_proj"]
+  rank: 16
+  scale: 2.0
+  dropout: 0.05

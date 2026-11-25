@@ -1,0 +1,125 @@
+{
+  "name": "src-loose-grep",
+  "split": "test_src",
+  "pipeline": "verifier",
+  "gguf": null,
+  "prompt_style": "short",
+  "true_bias": 0.0,
+  "candidates": 128,
+  "gold_findings": 36,
+  "candidate_recall_ceiling": 1.0,
+  "verdict": {
+    "tp": 45,
+    "fp": 62,
+    "fn": 0,
+    "precision": 0.421,
+    "recall": 1.0,
+    "f1": 0.592,
+    "tn": 0,
+    "accuracy": 0.421
+  },
+  "json_valid_strict": 1.0,
+  "json_parsed": 1.0,
+  "overall": {
+    "tp": 36,
+    "fp": 60,
+    "fn": 0,
+    "precision": 0.375,
+    "recall": 1.0,
+    "f1": 0.545,
+    "macro_f1": 0.655
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 10,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.833,
+      "recall": 1.0,
+      "f1": 0.909
+    },
+    "insecure_webview": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.889
+    },
+    "hardcoded_secret": {
+      "tp": 2,
+      "fp": 13,
+      "fn": 0,
+      "precision": 0.133,
+      "recall": 1.0,
+      "f1": 0.235
+    },
+    "weak_crypto": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_network": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_storage": {
+      "tp": 5,
+      "fp": 10,
+      "fn": 0,
+      "precision": 0.333,
+      "recall": 1.0,
+      "f1": 0.5
+    },
+    "provider_sqli": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4
+    },
+    "intent_redirection": {
+      "tp": 7,
+      "fp": 31,
+      "fn": 0,
+      "precision": 0.184,
+      "recall": 1.0,
+      "f1": 0.311
+    }
+  },
+  "per_app": {
+    "insecurebankv2-src": {
+      "tp": 19,
+      "fp": 45,
+      "fn": 0,
+      "precision": 0.297,
+      "recall": 1.0,
+      "f1": 0.458,
+      "macro_f1": 0.652
+    },
+    "ovaa-src": {
+      "tp": 17,
+      "fp": 17,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667,
+      "macro_f1": 0.728
+    }
+  },
+  "outcome_counts": {
+    "tp": 36,
+    "fp": 60,
+    "dup": 10,
+    "ignored": 22
+  },
+  "wall_s": 0.0
+}

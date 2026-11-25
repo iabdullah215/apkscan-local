@@ -1,0 +1,12 @@
+
+llama_quantize: quantize time =  1911.25 ms
+llama_quantize:    total time =  1911.25 ms
+
+llama_quantize: quantize time = 12547.28 ms
+llama_quantize:    total time = 12547.28 ms
+-rw-r--r--@ 1 hwatsauce  staff  3093669056 24 Nov 17:41 models/gguf/tuned-verifier-v1-F16.gguf
+-rw-r--r--  1 hwatsauce  staff   986048192 24 Nov 17:42 models/gguf/tuned-verifier-v1-Q4_K_M.gguf
+-rw-r--r--  1 hwatsauce  staff  1646572736 24 Nov 17:41 models/gguf/tuned-verifier-v1-Q8_0.gguf
+33ca8f3aaa98e8902ce0ca27a7447c010feb914c3e3f5ac1fe0a382ba35b6186  models/gguf/tuned-verifier-v1-F16.gguf
+a50d8961b536523f9b37acd5307ac49867109f07dd0a53bf6f322d262c3b65c3  models/gguf/tuned-verifier-v1-Q4_K_M.gguf
+d0d032f4f52629a7f200a7a53a04c917564ace754153cf31bc7214d1154eb5a4  models/gguf/tuned-verifier-v1-Q8_0.gguf

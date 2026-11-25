@@ -1,0 +1,12 @@
+
+llama_quantize: quantize time =  1663.92 ms
+llama_quantize:    total time =  1663.93 ms
+
+llama_quantize: quantize time = 11818.23 ms
+llama_quantize:    total time = 11818.23 ms
+-rw-r--r--@ 1 hwatsauce  staff  3093669024 24 Nov 15:43 models/gguf/tuned-v2-F16.gguf
+-rw-r--r--  1 hwatsauce  staff   986048160 24 Nov 15:43 models/gguf/tuned-v2-Q4_K_M.gguf
+-rw-r--r--  1 hwatsauce  staff  1646572704 24 Nov 15:43 models/gguf/tuned-v2-Q8_0.gguf
+a2ff8ccc828730e1c3c018eb306d2d76730a2aa74a824dcadbfef0e8e8b034b7  models/gguf/tuned-v2-F16.gguf
+2d14f1f93216d6e62bd64e5792b3ee1c7abdbc04a54b064c47cc93290d6a83b6  models/gguf/tuned-v2-Q4_K_M.gguf
+be53c24111c3e8e23233691d02200630d17b3fe09dae06e1028aa7bf4cb8c68a  models/gguf/tuned-v2-Q8_0.gguf

@@ -1,0 +1,10 @@
+# model weights and video are hosted on Hugging Face and YouTube, never committed
+*.gguf
+*.safetensors
+*.mov
+*.mp4
+models/
+video/
+.DS_Store
+__pycache__/
+*.pyc

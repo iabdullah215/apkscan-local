@@ -1,0 +1,279 @@
+{
+  "meta": {
+    "model": "tuned-verifier-v1-Q8_0.gguf",
+    "mode": "verify",
+    "files": 22,
+    "candidates": 43,
+    "unparsed": 0,
+    "seconds": 54.6,
+    "target": "ovaa-1.0.0-debug.apk"
+  },
+  "findings": [
+    {
+      "vuln_class": "exported_component",
+      "cwe": "CWE-926",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "AndroidManifest.xml",
+      "line_range": [
+        24,
+        29
+      ],
+      "evidence": "<activity LoginActivity> exported=\"true\" without android:permission",
+      "why_exploitable": "Any app can start LoginActivity directly, skipping the screens and checks that normally lead to it.",
+      "fix": "Set android:exported=\"false\" unless other apps need it; otherwise add android:permission with a signature-level permission."
+    },
+    {
+      "vuln_class": "exported_component",
+      "cwe": "CWE-926",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "AndroidManifest.xml",
+      "line_range": [
+        30,
+        35
+      ],
+      "evidence": "<activity EntranceActivity> exported=\"true\" without android:permission",
+      "why_exploitable": "Any app can start EntranceActivity directly, skipping the screens and checks that normally lead to it.",
+      "fix": "Set android:exported=\"false\" unless other apps need it; otherwise add android:permission with a signature-level permission."
+    },
+    {
+      "vuln_class": "exported_component",
+      "cwe": "CWE-926",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "AndroidManifest.xml",
+      "line_range": [
+        36,
+        41
+      ],
+      "evidence": "<activity MainActivity> exported=\"true\" without android:permission",
+      "why_exploitable": "Any app can start MainActivity directly, skipping the screens and checks that normally lead to it.",
+      "fix": "Set android:exported=\"false\" unless other apps need it; otherwise add android:permission with a signature-level permission."
+    },
+    {
+      "vuln_class": "exported_component",
+      "cwe": "CWE-926",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "AndroidManifest.xml",
+      "line_range": [
+        48,
+        52
+      ],
+      "evidence": "<service oversecured.ovaa.services.InsecureLoggerService> exported=\"true\" without android:permission",
+      "why_exploitable": "Any app can query or modify the exported services and receive the app's identity, so other apps can steal app data.",
+      "fix": "Set android:exported=\"false\" unless other apps need it; otherwise add android:permission with a signature-level permission."
+    },
+    {
+      "vuln_class": "exported_component",
+      "cwe": "CWE-926",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "AndroidManifest.xml",
+      "line_range": [
+        53,
+        53
+      ],
+      "evidence": "The provider exported=\"true\" without permission",
+      "why_exploitable": "Any app can query or modify the private data of other apps through content://oversecured.ovaa.theftoverwrite/oversecured.ovaa.theftoverwrite/credentials, bypassing the PIN screen.",
+      "fix": "Set android:exported=\"false\" unless other apps need it; otherwise protect it with a signature-level android:permission."
+    },
+    {
+      "vuln_class": "insecure_network",
+      "cwe": "CWE-319",
+      "masvs": "MASVS-NETWORK-1",
+      "severity": "high",
+      "file": "oversecured/ovaa/network/RetrofitInstance.java",
+      "line_range": [
+        8,
+        8
+      ],
+      "evidence": "BASE_URL = \"http://example.com./api/v1/\"",
+      "why_exploitable": "Anyone can unpack the APK and read BASE_URL; the same value ships to every install and cannot be rotated without an update.",
+      "fix": "Remove the secret from the app; keep it on the server and issue short-lived, per-user tokens."
+    },
+    {
+      "vuln_class": "intent_redirection",
+      "cwe": "CWE-925",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "high",
+      "file": "oversecured/ovaa/receivers/UselessReceiver.java",
+      "line_range": [
+        10,
+        10
+      ],
+      "evidence": "onReceive runs any installed receiver of a given action and executes its code with the app's identity",
+      "why_exploitable": "Any app can send broadcasts to this receiver and drive its logic with forged extras.",
+      "fix": "Do not take the app out of the sandbox; keep it on the device and allow only trusted packages to send broadcasts."
+    },
+    {
+      "vuln_class": "hardcoded_secret",
+      "cwe": "CWE-925",
+      "masvs": "MASVS-CRYPTO-2",
+      "severity": "high",
+      "file": "oversecured/ovaa/services/InsecureLoggerService.java",
+      "line_range": [
+        18,
+        18
+      ],
+      "evidence": "onHandleIntent runs dumpLogs for any sender of the action",
+      "why_exploitable": "The receiver of the broadcast (any app that sends this action) can register for it and drive the sensitive operation with crafted intents.",
+      "fix": "Use an explicit intent (setPackage(getPackageName()) or setComponent), a signature permission on send, or an in-process callback."
+    },
+    {
+      "vuln_class": "hardcoded_secret",
+      "cwe": "CWE-798",
+      "masvs": "MASVS-CRYPTO-2",
+      "severity": "high",
+      "file": "oversecured/ovaa/utils/LoginUtils.java",
+      "line_range": [
+        11,
+        13
+      ],
+      "evidence": "PASSWORD_KEY = \"password\"",
+      "why_exploitable": "Anyone can read the password by decompiling the APK and extracting it, or the password can be guessed.",
+      "fix": "Remove it from the app; keep secrets server-side or generate keys in the Android Keystore."
+    },
+    {
+      "vuln_class": "hardcoded_secret",
+      "cwe": "CWE-321",
+      "masvs": "MASVS-CRYPTO-2",
+      "severity": "high",
+      "file": "oversecured/ovaa/utils/WeakCrypto.java",
+      "line_range": [
+        9,
+        9
+      ],
+      "evidence": "KEY = \"49u5gh249gh24985ghf429gh4ch8f23f...\"",
+      "why_exploitable": "Anyone can unpack the APK and read KEY; the same value ships to every install and cannot be rotated without an update.",
+      "fix": "Remove the secret from the app; keep it on the server and issue short-lived, per-user tokens."
+    },
+    {
+      "vuln_class": "intent_redirection",
+      "cwe": "CWE-940",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+      "line_range": [
+        64,
+        64
+      ],
+      "evidence": "on return from startActivityForResult, the caller chooses whether to accept the result or not",
+      "why_exploitable": "The caller controls whether the result is returned to the caller app or not, so it can obtain the URI itself without a deep link.",
+      "fix": "Return the result to the caller app, never echo it, and require explicit user confirmation."
+    },
+    {
+      "vuln_class": "insecure_network",
+      "cwe": "CWE-319",
+      "masvs": "MASVS-NETWORK-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/activities/MainActivity.java",
+      "line_range": [
+        50,
+        50
+      ],
+      "evidence": "Intent i = new Intent(\"oversecured.ovaa.action.WEBVIEW\")",
+      "why_exploitable": "Whoever receives the broadcast (for example through an IntentFilter) runs arbitrary HTML and JavaScript, so the page can steal the token.",
+      "fix": "Do not launch Intents for non-exported components or send broadcasts to other apps; map intents to inner classes or services only."
+    },
+    {
+      "vuln_class": "insecure_webview",
+      "cwe": "CWE-749",
+      "masvs": "MASVS-PLATFORM-2",
+      "severity": "medium",
+      "file": "oversecured/ovaa/activities/WebViewActivity.java",
+      "line_range": [
+        18,
+        18
+      ],
+      "evidence": "JavaScript-enabled WebView loads the \"url\" extra into the WebView's view hierarchy",
+      "why_exploitable": "Attacker-controlled content loaded in this WebView can run script with the app's WebView privileges.",
+      "fix": "Do not render HTML from intent extras; keep JavaScript off for untrusted content."
+    },
+    {
+      "vuln_class": "intent_redirection",
+      "cwe": "CWE-939",
+      "masvs": "MASVS-PLATFORM-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/activities/WebViewActivity.java",
+      "line_range": [
+        18,
+        18
+      ],
+      "evidence": "JavaScript-enabled WebView loads the \"url\" extra into the WebView's view hierarchy",
+      "why_exploitable": "Attacker-controlled content loaded in this WebView can run script with the app's WebView privileges.",
+      "fix": "Do not render HTML from intent extras; keep JavaScript off for untrusted content."
+    },
+    {
+      "vuln_class": "insecure_webview",
+      "cwe": "CWE-749",
+      "masvs": "MASVS-PLATFORM-2",
+      "severity": "medium",
+      "file": "oversecured/ovaa/activities/WebViewActivity.java",
+      "line_range": [
+        24,
+        25
+      ],
+      "evidence": "JavaScript-enabled WebView loads any URL passed to it, including file:// URLs",
+      "why_exploitable": "JavaScript in a file:// page can read other local files (and with universal access, any origin), so a loaded HTML file can steal app data.",
+      "fix": "Call setAllowFileAccessFromFileURLs(false) and serve local content through WebViewAssetLoader over https://appassets.androidplatform.net."
+    },
+    {
+      "vuln_class": "insecure_storage",
+      "cwe": "CWE-922",
+      "masvs": "MASVS-STORAGE-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/providers/TheftOverwriteProvider.java",
+      "line_range": [
+        46,
+        46
+      ],
+      "evidence": "opened with mode 805306368 (world writeable)",
+      "why_exploitable": "World-accessible files in the app sandbox can be read or changed by every other app on older Android versions.",
+      "fix": "Use MODE_PRIVATE; share data with other apps only through a FileProvider with explicit grants."
+    },
+    {
+      "vuln_class": "insecure_storage",
+      "cwe": "CWE-922",
+      "masvs": "MASVS-STORAGE-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/services/InsecureLoggerService.java",
+      "line_range": [
+        43,
+        43
+      ],
+      "evidence": "writes logcat to get the logs",
+      "why_exploitable": "Sensitive data is stored where other apps, backups or anyone with device access can read it.",
+      "fix": "Write sensitive data to getFilesDir() or encrypt it, and share it only through a FileProvider."
+    },
+    {
+      "vuln_class": "insecure_storage",
+      "cwe": "CWE-922",
+      "masvs": "MASVS-STORAGE-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/utils/FileUtils.java",
+      "line_range": [
+        27,
+        29
+      ],
+      "evidence": "opened with context.openInputStream(uri) and then written to the cache dir",
+      "why_exploitable": "Sensitive data is stored where other apps, backups or anyone with device access can read it.",
+      "fix": "Avoid storing it, or encrypt it with a Keystore-backed key (EncryptedSharedPreferences/EncryptedFile) in internal storage."
+    },
+    {
+      "vuln_class": "weak_crypto",
+      "cwe": "CWE-327",
+      "masvs": "MASVS-CRYPTO-1",
+      "severity": "medium",
+      "file": "oversecured/ovaa/utils/WeakCrypto.java",
+      "line_range": [
+        16,
+        17
+      ],
+      "evidence": "Cipher.getInstance(\"AES\")",
+      "why_exploitable": "This algorithm or mode is broken or deterministic, so encrypted data can be recovered or patterns leak.",
+      "fix": "Use AES/GCM/NoPadding with a random IV and a Keystore key, SecureRandom for random values, and a slow salted KDF for passwords."
+    }
+  ]
+}

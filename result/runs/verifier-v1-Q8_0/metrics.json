@@ -1,0 +1,133 @@
+{
+  "name": "verifier-v1-Q8_0",
+  "split": "test",
+  "pipeline": "verifier",
+  "gguf": "models/gguf/tuned-verifier-v1-Q8_0.gguf",
+  "prompt_style": "short",
+  "true_bias": 0.62,
+  "candidates": 129,
+  "gold_findings": 36,
+  "candidate_recall_ceiling": 1.0,
+  "verdict": {
+    "tp": 39,
+    "fp": 28,
+    "fn": 3,
+    "precision": 0.582,
+    "recall": 0.929,
+    "f1": 0.716,
+    "tn": 39,
+    "accuracy": 0.716
+  },
+  "json_valid_strict": 0.969,
+  "json_parsed": 1.0,
+  "overall": {
+    "tp": 34,
+    "fp": 27,
+    "fn": 2,
+    "precision": 0.557,
+    "recall": 0.944,
+    "f1": 0.701,
+    "macro_f1": 0.742
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 10,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.909,
+      "recall": 1.0,
+      "f1": 0.952
+    },
+    "insecure_webview": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.889
+    },
+    "hardcoded_secret": {
+      "tp": 2,
+      "fp": 12,
+      "fn": 0,
+      "precision": 0.143,
+      "recall": 1.0,
+      "f1": 0.25
+    },
+    "weak_crypto": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_network": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_storage": {
+      "tp": 5,
+      "fp": 7,
+      "fn": 0,
+      "precision": 0.417,
+      "recall": 1.0,
+      "f1": 0.588
+    },
+    "provider_sqli": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667
+    },
+    "intent_redirection": {
+      "tp": 5,
+      "fp": 5,
+      "fn": 2,
+      "precision": 0.5,
+      "recall": 0.714,
+      "f1": 0.588
+    }
+  },
+  "per_app": {
+    "insecurebankv2": {
+      "tp": 19,
+      "fp": 18,
+      "fn": 0,
+      "precision": 0.514,
+      "recall": 1.0,
+      "f1": 0.679,
+      "macro_f1": 0.778
+    },
+    "ovaa": {
+      "tp": 15,
+      "fp": 10,
+      "fn": 2,
+      "precision": 0.6,
+      "recall": 0.882,
+      "f1": 0.714,
+      "macro_f1": 0.765
+    }
+  },
+  "outcome_counts": {
+    "tp": 34,
+    "fp": 27,
+    "dup": 6,
+    "ignored": 15
+  },
+  "wall_s": 259.4,
+  "perf": {
+    "prompt_tok_per_s": 657.1,
+    "gen_tok_per_s": 52.0,
+    "avg_s_per_candidate": 2.01,
+    "scan_s_per_app": 129.4,
+    "peak_rss_mb": 3704,
+    "gguf_mb": 1647
+  }
+}

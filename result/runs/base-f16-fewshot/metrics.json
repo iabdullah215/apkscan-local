@@ -1,0 +1,124 @@
+{
+  "name": "base-f16-fewshot",
+  "gguf": "models/gguf/base-F16.gguf",
+  "few_shot": 2,
+  "prompt_version": "v2",
+  "prompt_style": "full",
+  "empty_bias": 0.0,
+  "chunks": 48,
+  "gold_findings": 36,
+  "json_valid_strict": 0.917,
+  "json_parsed": 0.917,
+  "schema_valid": 0.917,
+  "overall": {
+    "tp": 8,
+    "fp": 22,
+    "fn": 28,
+    "precision": 0.267,
+    "recall": 0.222,
+    "f1": 0.242,
+    "macro_f1": 0.225
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 2,
+      "fp": 2,
+      "fn": 8,
+      "precision": 0.5,
+      "recall": 0.2,
+      "f1": 0.286
+    },
+    "insecure_webview": {
+      "tp": 3,
+      "fp": 16,
+      "fn": 1,
+      "precision": 0.158,
+      "recall": 0.75,
+      "f1": 0.261
+    },
+    "hardcoded_secret": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "weak_crypto": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_network": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0.333,
+      "recall": 0.2,
+      "f1": 0.25
+    },
+    "insecure_storage": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "provider_sqli": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "intent_redirection": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 7,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "per_app": {
+    "insecurebankv2": {
+      "tp": 2,
+      "fp": 13,
+      "fn": 17,
+      "precision": 0.133,
+      "recall": 0.105,
+      "f1": 0.118,
+      "macro_f1": 0.142
+    },
+    "ovaa": {
+      "tp": 6,
+      "fp": 9,
+      "fn": 11,
+      "precision": 0.4,
+      "recall": 0.353,
+      "f1": 0.375,
+      "macro_f1": 0.357
+    }
+  },
+  "outcome_counts": {
+    "tp": 8,
+    "fp": 22,
+    "dup": 0,
+    "ignored": 14
+  },
+  "wall_s": 300.2,
+  "perf": {
+    "prompt_tok_per_s": 1747.9,
+    "gen_tok_per_s": 31.0,
+    "prompt_tokens": 101153,
+    "completion_tokens": 7414,
+    "avg_s_per_chunk": 6.21,
+    "peak_rss_mb": 3403,
+    "gguf_mb": 3094
+  }
+}

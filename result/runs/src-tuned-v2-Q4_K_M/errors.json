@@ -1,0 +1,406 @@
+{
+ "false_negatives": [
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    24,
+    24
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    25,
+    25
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    26,
+    26
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    27,
+    31
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    32,
+    32
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/CryptoClass.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    28,
+    30
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/MyBroadCastReceiver.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    29,
+    29
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ViewStatement.java",
+   "vuln_class": "insecure_webview",
+   "line_range": [
+    36,
+    42
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoLogin.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    61,
+    61
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoLogin.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    184,
+    197
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ChangePassword.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    70,
+    70
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    78,
+    78
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    204,
+    208
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    21,
+    26
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    33,
+    38
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    45,
+    49
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    50,
+    50
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/LoginActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    77,
+    80
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    35,
+    39
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    61,
+    65
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "insecure_webview",
+   "line_range": [
+    50,
+    53
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/MainActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    55,
+    58
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/MainActivity.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    56,
+    56
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/network/RetrofitInstance.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    7,
+    7
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/WeakCrypto.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    16,
+    18
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/LoginUtils.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    38,
+    40
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/FileUtils.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    28,
+    31
+   ]
+  }
+ ],
+ "false_positives": [
+  {
+   "file": "com/android/insecurebankv2/ChangePassword.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    61,
+    61
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ChangePassword.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    137,
+    137
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/CryptoClass.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    93,
+    93
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoLogin.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    97,
+    97
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoLogin.java",
+   "vuln_class": "insecure_network",
+   "line_range": [
+    202,
+    202
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    93,
+    93
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    128,
+    128
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    202,
+    208
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/DoTransfer.java",
+   "vuln_class": "insecure_webview",
+   "line_range": [
+    366,
+    372
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/FilePrefActivity.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    45,
+    45
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/FilePrefActivity.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    113,
+    113
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/LoginActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    193,
+    194
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/PostLogin.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    64,
+    64
+   ]
+  },
+  {
+   "file": "com/android/insecurebankv2/ViewStatement.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    31,
+    31
+   ]
+  },
+  {
+   "file": "AndroidManifest.xml",
+   "vuln_class": "exported_component",
+   "line_range": [
+    15,
+    15
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/OversecuredApplication.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    20,
+    20
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/DeeplinkActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    22,
+    24
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/activities/LoginActivity.java",
+   "vuln_class": "intent_redirection",
+   "line_range": [
+    29,
+    29
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/network/RetrofitInstance.java",
+   "vuln_class": "hardcoded_secret",
+   "line_range": [
+    7,
+    7
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/objects/LoginData.java",
+   "vuln_class": "weak_crypto",
+   "line_range": [
+    18,
+    19
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/providers/TheftOverwriteProvider.java",
+   "vuln_class": "provider_sqli",
+   "line_range": [
+    27,
+    27
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/FileUtils.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    20,
+    22
+   ]
+  },
+  {
+   "file": "oversecured/ovaa/utils/LoginUtils.java",
+   "vuln_class": "insecure_storage",
+   "line_range": [
+    23,
+    23
+   ]
+  }
+ ]
+}

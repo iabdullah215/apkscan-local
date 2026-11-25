@@ -1,0 +1,116 @@
+{
+  "name": "src-grep",
+  "split": "test_src",
+  "gguf": null,
+  "few_shot": 0,
+  "prompt_version": "v2",
+  "prompt_style": "full",
+  "empty_bias": 0.0,
+  "chunks": 49,
+  "gold_findings": 36,
+  "json_valid_strict": 1.0,
+  "json_parsed": 1.0,
+  "schema_valid": 1.0,
+  "overall": {
+    "tp": 28,
+    "fp": 7,
+    "fn": 8,
+    "precision": 0.8,
+    "recall": 0.778,
+    "f1": 0.789,
+    "macro_f1": 0.756
+  },
+  "per_class": {
+    "exported_component": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_webview": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.667
+    },
+    "hardcoded_secret": {
+      "tp": 2,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.4,
+      "recall": 1.0,
+      "f1": 0.571
+    },
+    "weak_crypto": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_network": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "insecure_storage": {
+      "tp": 3,
+      "fp": 3,
+      "fn": 2,
+      "precision": 0.5,
+      "recall": 0.6,
+      "f1": 0.545
+    },
+    "provider_sqli": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667
+    },
+    "intent_redirection": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 4,
+      "precision": 1.0,
+      "recall": 0.429,
+      "f1": 0.6
+    }
+  },
+  "per_app": {
+    "insecurebankv2-src": {
+      "tp": 16,
+      "fp": 4,
+      "fn": 3,
+      "precision": 0.8,
+      "recall": 0.842,
+      "f1": 0.821,
+      "macro_f1": 0.813
+    },
+    "ovaa-src": {
+      "tp": 12,
+      "fp": 4,
+      "fn": 5,
+      "precision": 0.75,
+      "recall": 0.706,
+      "f1": 0.727,
+      "macro_f1": 0.742
+    }
+  },
+  "outcome_counts": {
+    "tp": 28,
+    "fp": 7,
+    "dup": 4,
+    "ignored": 2
+  },
+  "wall_s": 0.0
+}

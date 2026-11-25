@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "model": "base-Q8_0.gguf",
+    "mode": "verify",
+    "files": 22,
+    "candidates": 43,
+    "unparsed": 43,
+    "seconds": 26.7,
+    "target": "ovaa-1.0.0-debug.apk"
+  },
+  "findings": []
+}

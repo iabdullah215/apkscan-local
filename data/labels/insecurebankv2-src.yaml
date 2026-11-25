@@ -1,0 +1,38 @@
+# Ground truth for InsecureBankv2 in SOURCE form (test_src split): same app as labels/insecurebankv2.yaml,
+# read from GitHub source at commit 3c8cc3a3 (InsecureBankv2/app/src/main; wip-attackercode excluded).
+# Same findings and ignore regions as the jadx test set, at source line numbers.
+app: insecurebankv2-src
+split: test_src
+findings:
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [22, 22], severity: high, evidence: 'PostLogin exported="true", no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [24, 24], severity: high, evidence: 'DoTransfer exported="true", no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [25, 25], severity: medium, evidence: 'ViewStatement exported="true", no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [26, 26], severity: high, evidence: 'TrackUserContentProvider exported="true", no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [27, 31], severity: high, evidence: 'MyBroadCastReceiver exported="true", no permission'}
+  - {file: AndroidManifest.xml, vuln_class: exported_component, line_range: [32, 32], severity: high, evidence: 'ChangePassword exported="true", no permission'}
+  - {file: com/android/insecurebankv2/CryptoClass.java, vuln_class: hardcoded_secret, line_range: [25, 25], severity: high, evidence: 'key = "This is the super secret key 123"'}
+  - {file: com/android/insecurebankv2/CryptoClass.java, vuln_class: weak_crypto, line_range: [28, 30], alt_ranges: [[52, 55], [75, 77]], severity: medium, evidence: 'all-zero static IV used for AES/CBC'}
+  - {file: com/android/insecurebankv2/MyBroadCastReceiver.java, vuln_class: insecure_storage, line_range: [29, 29], severity: medium, evidence: 'getSharedPreferences(MYPREFS, Context.MODE_WORLD_READABLE)', cwe: CWE-276}
+  - {file: com/android/insecurebankv2/MyBroadCastReceiver.java, vuln_class: intent_redirection, line_range: [24, 40], severity: high, evidence: 'phonenumber/newpass extras from any sender trigger an SMS with the decrypted password', cwe: CWE-925}
+  - {file: com/android/insecurebankv2/TrackUserContentProvider.java, vuln_class: provider_sqli, line_range: [96, 113], severity: high, evidence: 'caller selection and sortOrder passed to SQLiteQueryBuilder.query in an exported provider'}
+  - {file: com/android/insecurebankv2/MyWebViewClient.java, vuln_class: insecure_webview, line_range: [11, 14], severity: low, evidence: 'shouldOverrideUrlLoading loads any URL'}
+  - {file: com/android/insecurebankv2/ViewStatement.java, vuln_class: insecure_webview, line_range: [36, 42], severity: medium, evidence: 'loads file:// HTML from external storage with JavaScript enabled; file name from intent extra'}
+  - {file: com/android/insecurebankv2/DoLogin.java, vuln_class: insecure_network, line_range: [61, 61], alt_ranges: [[117, 118]], severity: high, evidence: 'protocol = "http://" for login'}
+  - {file: com/android/insecurebankv2/DoLogin.java, vuln_class: insecure_storage, line_range: [184, 197], severity: high, evidence: 'saves base64 username and hardcoded-key-encrypted password in SharedPreferences'}
+  - {file: com/android/insecurebankv2/ChangePassword.java, vuln_class: insecure_network, line_range: [70, 70], alt_ranges: [[129, 129]], severity: high, evidence: 'protocol = "http://" for password change'}
+  - {file: com/android/insecurebankv2/ChangePassword.java, vuln_class: intent_redirection, line_range: [222, 228], severity: high, evidence: 'implicit broadcast "theBroadcast" carries the new password', cwe: CWE-927}
+  - {file: com/android/insecurebankv2/DoTransfer.java, vuln_class: insecure_network, line_range: [78, 78], alt_ranges: [[132, 132], [264, 264]], severity: high, evidence: 'protocol = "http://" for transfers'}
+  - {file: com/android/insecurebankv2/DoTransfer.java, vuln_class: insecure_storage, line_range: [204, 208], alt_ranges: [[223, 228]], severity: medium, evidence: 'transaction statements appended to external storage HTML'}
+ignore:
+  - {file: AndroidManifest.xml, line_range: [13, 13], reason: allowBackup, outside v1 classes}
+  - {file: com/android/insecurebankv2/TrackUserContentProvider.java, line_range: [45, 57], reason: delete with caller selection; same provider design as query}
+  - {file: com/android/insecurebankv2/TrackUserContentProvider.java, line_range: [119, 131], reason: update with caller selection}
+  - {file: com/android/insecurebankv2/DoLogin.java, line_range: [130, 132], reason: devadmin login backdoor}
+  - {file: com/android/insecurebankv2/DoLogin.java, line_range: [145, 145], reason: credentials logged}
+  - {file: com/android/insecurebankv2/ChangePassword.java, line_range: [84, 88], reason: username from intent of exported activity, auth bypass}
+  - {file: com/android/insecurebankv2/MyBroadCastReceiver.java, line_range: [39, 39], reason: password printed to stdout}
+  - {file: com/android/insecurebankv2/LoginActivity.java, line_range: [52, 56], reason: is_admin string resource}
+  - {file: com/android/insecurebankv2/LoginActivity.java, line_range: [126, 150], reason: reads stored credentials}
+  - {file: com/android/insecurebankv2/DoTransfer.java, line_range: [133, 145], reason: reads stored credentials}
+  - {file: com/android/insecurebankv2/DoTransfer.java, line_range: [265, 279], reason: reads stored credentials}
+  - {file: com/android/insecurebankv2/PostLogin.java, line_range: [116, 150], reason: root detection}

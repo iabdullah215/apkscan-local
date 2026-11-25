@@ -1,0 +1,6 @@
+7edd906dd08db85faa87fb495fba6ce0080560c1666d5b20e8fe9dfcbc61300e  models/normal/base-Q8_0.gguf
+a50d8961b536523f9b37acd5307ac49867109f07dd0a53bf6f322d262c3b65c3  models/fine-tuned/tuned-verifier-v1-Q4_K_M.gguf
+d0d032f4f52629a7f200a7a53a04c917564ace754153cf31bc7214d1154eb5a4  models/fine-tuned/tuned-verifier-v1-Q8_0.gguf
+0784bd881f5602ece80fced77b15459d6b4ad5119fbe2746ff792aa1e23648d7  models/fine-tuned/lora-adapter/adapter_config.json
+5211001b24e7c12686fe7b2ea4dc48fa9071426c803a566a622baa3a3301a8f4  models/fine-tuned/lora-adapter/adapters.safetensors
+40331ef6bc6589cd5c89fe1439bc9b84e62e5a43f7a064394db673d84d2b9fa8  video/demo.mov

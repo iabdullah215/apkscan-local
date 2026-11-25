@@ -1,0 +1,14 @@
+{
+ "adapter": "models/adapters/verifier-v1",
+ "n_valid": 141,
+ "greedy_acc": 0.865,
+ "best": {
+  "tau": -0.62,
+  "f1": 0.855,
+  "acc": 0.865,
+  "tp": 56,
+  "fp": 12,
+  "fn": 7
+ },
+ "true_bias": 0.62
+}
